@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Laravel</title>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+        <!-- Styles -->
+        <style>
+        body {
+            background-color: #1b1b17;
+        }
+        nav {
+            background-color: #d7bbad;
+        }
+    </style>
+</head>
+<body>
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Le Chat Affamé</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul id="menu-navegacion" class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link @yield('menu-activo-inicio')" href="{{ route('inicio') }}">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @yield('menu-activo-menu')" href="{{ url('/menu') }}">MENÚ</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link @yield('menu-activo-calidad')" href="{{ url('/calidad') }}">CALIDAD</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @yield('menu-activo-plantilla')" href="{{ url('/plantilla') }}">PLANTILLA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @yield('menu-activo-resenas') fw-bold" href="{{ route('reseñas') }}">RESEÑAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @yield('menu-activo-reservas')" href="{{ route('reservas') }}">RESERVAS</a>
+                    </li>
+                    <li>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit">Cerrar sesión</button>
+                    </form>
+                    </li>
+                </ul>
+                <button id="cambiarTextoBtn" class="btn btn-primary ml-auto">ESP<->ENG</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="bg-black d-flex flex-row justify-content-between align-items-center" style="width: 100%;">
+        
+        <div class="d-flex flex-row justify-content-center align-items-center">
+            <img src="{{ asset('img/fotoreseñas.png') }}" alt="">
+        </div>
+
+        <div class="d-flex flex-column justify-content-start align-items-center" style="width: 50%;">
+
+            <div class="d-flex flex-column justify-content-start align-items-center mt-5 bg-secondary pb-4 mb-5" style="width: 90%;">
+
+                <div class="mb-4">
+                    <p class="text-white fs-2">Valora tu experiencia</p>
+                </div>
+
+                <div>
+                    <form action="{{ route('reseñaGuardar') }}" method="POST">
+                    @csrf
+
+                        <div class="d-flex flex-column justify-content-start align-items-center mb-2">
+                            <label for="" class="fs-4">Puntuación</label>
+                            <input type="number" name="puntuacion">
+                        </div>
+
+                        <div class="d-flex flex-column justify-content-start align-items-center mt-2">
+                            <label for="" class="fs-4">Comentario</label>
+                            <input type="text" name="comentario">
+                        </div>
+
+                        <input type="hidden" name="idUsu" value="{{Session::get('usuario')->idUsu}}">
+
+                        <div  class="d-flex flex-column justify-content-start align-items-center mt-2">
+                            <button type="submit" class="bg-danger">ENVIAR</button>
+                        </div>
+
+                    </form>
+                </div>
+                </div>
+
+                <div class="d-flex flex-column justify-content-start align-items-center mb-5" style="width: 90%;">
+                    @foreach($reseñas as $reseña)
+                        <div class="my-1 d-flex flex-row justify-content-start align-items-center" style="min-width: 100%; background-color:#d7bbad;">
+                            <div class="bg-primary ms-2 text-center me-3" style="width: 8%;">
+                                <b class="fs-3 text-center text-white">{{$reseña->puntuacion}}</b>
+                            </div>
+                            <div class="d-flex flex-column justify-content-start align-items-start" style="height: 4rem;">
+                                <b>{{$reseña->nombre}}</b>
+                                {{$reseña->comentario}}
+                            </div>
+
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+
+
+    </div>
+        
+    <div>
+    @extends('footer')
+    </div>
+
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var cambiarTextoBtn = document.getElementById('cambiarTextoBtn');
+            var menuNavegacion = document.getElementById('menu-navegacion');
+            var textosOriginales = ['INICIO', 'MENÚ', 'CALIDAD', 'PLANTILLA', 'RESEÑAS', 'RESERVAS'];
+            var textosAlternativos = ['HOME', 'MENU', 'QUALITY', 'STAFF', 'REVIEWS', 'RESERVATIONS'];
+            var indiceTexto = 0;
+
+            function cambiarTextoMenu() {
+                var elementosMenu = menuNavegacion.querySelectorAll('a.nav-link');
+                elementosMenu.forEach(function(elemento, index) {
+                    elemento.textContent = (indiceTexto % 2 === 1) ? textosOriginales[index] : textosAlternativos[index];
+                });
+                indiceTexto++;
+            }
+
+            cambiarTextoBtn.addEventListener('click', cambiarTextoMenu);
+        });
+    </script>
+</body>
+</html>
