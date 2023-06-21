@@ -109,12 +109,13 @@ class ReservaController extends Controller
     }
 
     public function insertarPromocion(){
-        return view("insertarPromo");    
+
+        $codigosPromo = Promocion::all();
+
+        return view("insertarPromo",["codigosPromo" => $codigosPromo]);    
     }
 
     public function insertarPromo(Request $req){
-
-        var_dump("hola");
 
         $promocion = $req->promocion;
 
@@ -125,6 +126,13 @@ class ReservaController extends Controller
         $nuevaPromo->save();
 
         return redirect()->route("reservas");
+    }   
+
+    public function borrarPromo($idPro){
+
+        Promocion::destroy($idPro);
+
+        return redirect()->route("insertarPromocion");
     }   
     
 }

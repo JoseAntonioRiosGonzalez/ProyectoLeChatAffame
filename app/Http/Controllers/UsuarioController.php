@@ -22,7 +22,7 @@ class UsuarioController extends Controller
 
         if ($usuariosBD && password_verify($password, $usuariosBD->password)) {
             Session::put('usuario', $usuariosBD);
-            return view("inicio", ["usuario" =>$usuariosBD]);
+            return view("menu", ["usuario" =>$usuariosBD]);
         } else {
             return view("welcome");
         }
@@ -48,5 +48,17 @@ class UsuarioController extends Controller
 
         return view("welcome");
         
+    }
+
+    public function menu(){
+        return view("menu");
+    }
+
+    public function calidad(){
+        return view("calidad");
+    }
+
+    public function plantilla(){
+        return view("plantilla");
     }
 }

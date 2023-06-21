@@ -17,12 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        if(Auth::user()){
-            var_dump("hola");
-        }else{
-            var_dump("adios");
-        }
-        return view('inicio');
+        return view('welcome');
     }
 
     /**
