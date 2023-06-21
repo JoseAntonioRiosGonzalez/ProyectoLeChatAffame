@@ -4,6 +4,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ReseñaController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\MenuController;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Route;
 
@@ -26,10 +27,10 @@ Route::get('/', function () {
 
 
 Route::post('/inicio', [UsuarioController::class, 'inicio'])->name("inicio");
-
+Route::get('/inicio', [UsuarioController::class, 'inicio'])->name("inicio");
 Route::post('/registro', [UsuarioController::class, 'registrar'])->name("registrar");
 
-
+Route::get('/plantilla', [UsuarioController::class, 'plantilla'])->name("plantilla");
 
 Route::get('/reseñas',  [ReseñaController::class, 'reseñas'])->name('reseñas');
 Route::post('/reseñas', [ReseñaController::class, 'guardarReseña'])->name('reseñaGuardar');
@@ -40,6 +41,12 @@ Route::post('/reservas/reservar',  [ReservaController::class, 'insertarReserva']
 Route::post('/reservas/promocion',  [ReservaController::class, 'promocion'])->name('promocion');
 Route::get('/reservas/insertarPromocion',  [ReservaController::class, 'insertarPromocion'])->name('insertarPromocion');
 Route::post('/reservas/insertarPromocion',  [ReservaController::class, 'insertarPromo'])->name('insertarPromo');
+Route::get('/reservas/insertarPromocion/borrar/{idPro}',  [ReservaController::class, 'borrarPromo'])->name('borrarPromo');
+
+Route::get('/menu', [UsuarioController::class, 'menu'])->name("menu");
+Route::get('/calidad', [UsuarioController::class, 'calidad'])->name("calidad");
+Route::get('/calidad', [UsuarioController::class, 'calidad'])->name("calidad");
+
 
 
 Route::get('/logout', function(){

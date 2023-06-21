@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Reservas</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,14 +14,18 @@
         <!-- Styles -->
         <style>
         body {
-            background-color: #1b1b17;
+            background-color: black;
         }
         nav {
             background-color: #d7bbad;
         }
         .mesa-no-disponible {
     color: red; /* Cambia el color del número de la mesa */
-    /* Agrega cualquier otro estilo visual que desees para indicar que la mesa no está disponible */
+}
+
+.btn{
+    background-color: #898e75 !important;
+    border-color: #898e75 !important;
 }
 
     </style>
@@ -29,59 +33,60 @@
 <body>
         <!-- Barra de navegación -->
         <nav class="navbar navbar-expand-md navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">Le Chat Affamé</a>
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="img/logo.png" alt="Logo" class="navbar-logo" style="width:10%">
+            <i>LE CHAT AFFAMÉ</i>
+        </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse" id="navbarNav" style="background: linear-gradient(to right, #d7bbad, #b2a490);">
                 <ul id="menu-navegacion" class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-inicio'); ?>" href="<?php echo e(route('inicio')); ?>">INICIO</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-menu'); ?>" href="<?php echo e(url('/menu')); ?>">MENÚ</a>
+                    <li class="nav-item; mx-4">
+                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-menu'); ?>" href="<?php echo e(route('menu')); ?>">MENÚ</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-calidad'); ?>" href="<?php echo e(url('/calidad')); ?>">CALIDAD</a>
+                    <li class="nav-item; mx-4">
+                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-calidad'); ?>" href="<?php echo e(route('calidad')); ?>">CALIDAD</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-plantilla'); ?>" href="<?php echo e(url('/plantilla')); ?>">PLANTILLA</a>
+                    <li class="nav-item; mx-4">
+                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-plantilla'); ?>" href="<?php echo e(route('plantilla')); ?>">PLANTILLA</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item; mx-4">
                         <a class="nav-link <?php echo $__env->yieldContent('menu-activo-resenas'); ?>" href="<?php echo e(route('reseñas')); ?>">RESEÑAS</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item; mx-4">
                         <a class="nav-link <?php echo $__env->yieldContent('menu-activo-reservas'); ?> fw-bold" href="<?php echo e(route('reservas')); ?>">RESERVAS</a>
                     </li>
-                    <li>
-                        <a href="<?php echo e(route('logout')); ?>"><button>Cerrar sesión</button></a>
-                    </li>
+                  
+                    
                 </ul>
-                <button id="cambiarTextoBtn" class="btn btn-primary ml-auto">ESP<->ENG</button>
             </div>
+
+            <button id="cambiarTextoBtn" class="btn btn-primary">LANG</button>
+            <ul class="mt-1 mx-5">
+                <a href="<?php echo e(route('logout')); ?>" style="text-decoration: none;" class="text-danger mt-5"><strong>LOGOUT</strong></a>
+            </ul>
+
         </div>
     </nav>
 
     <!-- Contenido principal -->
-    <div class="bg-black d-flex flex-row justify-content-between align-items-center" style="width: 100%;">
+    <div class="bg-black d-flex flex-row justify-content-between align-items-center" style="width: 100%; margin-left:20px; margin-top:20px">
         
-        <div class="d-flex flex-column justify-content-start align-items-start" style="width: 100%;min-height:100vh">
+        <div class="d-flex flex-column justify-content-start align-items-start" style="width: 100%;min-height:87.5vh">
 
             <div class="d-flex flex-column justify-content-start align-items-start" style="width: 100%;">
 
-                <div class="fs-5" style="width: 100%; border-bottom:2px solid white">
-                    <p class="text-white fw-bold mt-3 text-center">DISPONIBILDAD GENERAL</p>
-                </div>
+             
 
                 <div class="d-flex flex-column justify-content-start align-items-start" style="width: 100%;">
-                    <h1 class="text-white">Reserva de Mesas</h1>
 
                     <form method="POST" action="<?php echo e(route('comprobarMesas')); ?>" style="width: 100%;">
                         <?php echo csrf_field(); ?>
                         <div class="form-group">
-                            <label for="fecha">Fecha:</label>
+                            <label for="fecha"><span style="color: white;">Fecha:</span></label>
                             <input type="date" class="form-control" id="fecha" name="fecha" required style="width: 30%;">
                         </div>
                         <div class="d-flex flex-row justify-content-start align-items-center text-white" style="width: 100%;">
@@ -111,12 +116,12 @@
 
                                     <label>
                                         <?php if($mesaReservada): ?>
-                                            <input type="checkbox" name="mesas[]" value="<?php echo e($mesaNumero); ?>" disabled>
+                                            <input type="checkbox" class="form-check" name="mesas[]" value="<?php echo e($mesaNumero); ?>" disabled>
                                         <?php else: ?>
-                                            <input type="checkbox" name="mesas[]" value="<?php echo e($mesaNumero); ?>">
+                                            <input type="checkbox" class="form-check" name="mesas[]" value="<?php echo e($mesaNumero); ?>">
                                         <?php endif; ?>
                                         <span class="<?php echo e($claseMesa); ?>"><?php echo e($mesaNumero); ?></span>&nbsp;&nbsp;
-                                        <img src="<?php echo e(asset('img/iconoMesa.png')); ?>" style="width:3rem;">
+                                        <img src="<?php echo e(asset('img/iconoMesa.png')); ?>" style="width:2.3rem;">
                                     </label>
                                 </div>
 
@@ -130,14 +135,14 @@
 
                             <div class="mb-5">
                                 <div>
-                                    <p class="fs-3">Seleccione Sus Posibles Alergias</p>
+                                    <p class="fs-5">Seleccione sus posibles alergias</p>
                                 </div>
                                 <div class="d-flex flex-column justify-content-start align-items-start text-white">
-                                        <div class="d-flex flex-row my-1"><input type="checkbox" name="alergias[]" value="crustaceos">Crustáceos</div>
-                                        <div class="d-flex flex-row my-1"><input type="checkbox" name="alergias[]" value="gluten">Gluten</div>
-                                        <div class="d-flex flex-row my-1"><input type="checkbox" name="alergias[]" value="huevo">Huevo</div>
-                                        <div class="d-flex flex-row my-1"><input type="checkbox" name="alergias[]" value="lactosa">Lactosa</div>
-                                        <div class="d-flex flex-row my-1"><input type="checkbox" name="alergias[]" value="vegano">Vegano</div>
+                                        <div class="d-flex flex-row my-1"><input type="checkbox" class="form-check" name="alergias[]" value="crustaceos">Crustáceos</div>
+                                        <div class="d-flex flex-row my-1"><input type="checkbox" class="form-check" name="alergias[]" value="gluten">Gluten</div>
+                                        <div class="d-flex flex-row my-1"><input type="checkbox" class="form-check" name="alergias[]" value="huevo">Huevo</div>
+                                        <div class="d-flex flex-row my-1"><input type="checkbox" class="form-check" name="alergias[]" value="lactosa">Lactosa</div>
+                                        <div class="d-flex flex-row my-1"><input type="checkbox" class="form-check" name="alergias[]" value="vegano">Vegano</div>
                                 </div>
                             </div>
 
@@ -156,12 +161,12 @@
 
             </div>
 
-            <div class="mt-5" id="codigoPromocion">
-                <p class="mt-5 text-white fs-2">Codigo Promocional</p>
+            <div class="mt-2" id="codigoPromocion">
+                <p class="mt-2 text-white fs-6">Codigo Promocional</p>
                 <?php 
                     if(Session::get('usuario')->nombre == "admin"){
                 ?>
-                <a href="<?php echo e(route('insertarPromocion')); ?>" class="btn btn-secondary">INSERTAR NUEVO CODIGO PROMOCIONAL</a>
+                <a href="<?php echo e(route('insertarPromocion')); ?>" class="btn btn-secondary">MODIFICAR CÓDIGOS PROMOCIONALES</a>
                 <?php
                     }
                 ?>
@@ -169,7 +174,7 @@
                 <form action="<?php echo e(route('promocion')); ?>" method="post">
                     <?php echo csrf_field(); ?>
                     <input type="text" name="promocion" class="ms-1">
-                    <button class="bg-primary"><i class="bi bi-check-all text-white fs-4"></i></button>
+                    <button class="btn bg-primary"><i class="bi bi-check-all text-white fs-4"></i></button>
                 </form>
                 <?php if(session('promocionBien')): ?>
                     <div id="alertaPromocionBien" class="alert alert-success">
@@ -185,7 +190,7 @@
         </div>
 
         <div class="d-flex flex-row justify-content-center align-items-center">
-            <img src="<?php echo e(asset('img/fotoReservas.png')); ?>" style="min-height:100vh">
+            <img src="<?php echo e(asset('img/fotoReservas.png')); ?>" style="min-height:80vh;">
         </div>
 
     </div>

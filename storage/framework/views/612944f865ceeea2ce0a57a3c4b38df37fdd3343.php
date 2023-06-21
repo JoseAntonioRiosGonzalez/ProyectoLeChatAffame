@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Reseñas</title>
+        <title>Menu</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -39,7 +39,7 @@
             <div class="collapse navbar-collapse" id="navbarNav" style="background: linear-gradient(to right, #d7bbad, #b2a490);">
                 <ul id="menu-navegacion" class="navbar-nav ml-auto">
                     <li class="nav-item; mx-4">
-                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-menu'); ?>" href="<?php echo e(route('menu')); ?>">MENÚ</a>
+                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-menu'); ?> fw-bold" href="<?php echo e(route('menu')); ?>">MENÚ</a>
                     </li>
 
                     <li class="nav-item; mx-4">
@@ -49,12 +49,12 @@
                         <a class="nav-link <?php echo $__env->yieldContent('menu-activo-plantilla'); ?>" href="<?php echo e(route('plantilla')); ?>">PLANTILLA</a>
                     </li>
                     <li class="nav-item; mx-4">
-                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-resenas'); ?> fw-bold" href="<?php echo e(route('reseñas')); ?>">RESEÑAS</a>
+                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-resenas'); ?>" href="<?php echo e(route('reseñas')); ?>">RESEÑAS</a>
                     </li>
                     <li class="nav-item; mx-4">
                         <a class="nav-link <?php echo $__env->yieldContent('menu-activo-reservas'); ?>" href="<?php echo e(route('reservas')); ?>">RESERVAS</a>
                     </li>
-                   
+                    
                     
                 </ul>
             </div>
@@ -68,62 +68,39 @@
     </nav>
 
     <!-- Contenido principal -->
-    <div class="bg-black d-flex flex-row justify-content-between align-items-center" style="width: 100%; height: 50%;">
+    <div class="bg-black d-flex flex-row justify-content-between align-items-center" style="width: 100%; height:91vh">
         
-        <div class="d-flex flex-row justify-content-center align-items-center">
-            <img src="<?php echo e(asset('img/fotoreseñas.png')); ?>" alt="" style="width: 93%">
-        </div>
+        <div class="d-flex flex-column justify-content-between align-items-center" style="width: 33%;">
 
-        <div class="d-flex flex-column justify-content-start align-items-center" style="width: 50%;">
-
-            <div class="d-flex flex-column justify-content-start align-items-center mt-5 bg-secondary pb-4 mb-5" style="width: 90%;">
-
-                <div class="mb-4">
-                    <p class="text-white fs-2">Valora tu experiencia</p>
-                </div>
-
-                <div>
-                    <form action="<?php echo e(route('reseñaGuardar')); ?>" method="POST">
-                    <?php echo csrf_field(); ?>
-
-                        <div class="d-flex flex-column justify-content-start align-items-center mb-2">
-                            <label for="" class="fs-4">Puntuación</label>
-                            <input type="number" class="form-control" name="puntuacion">
-                        </div>
-
-                        <div class="d-flex flex-column justify-content-start align-items-center mt-2">
-                            <label for="" class="fs-4">Comentario</label>
-                            <input type="text" class="form-control" name="comentario">
-                        </div>
-
-                        <input type="hidden" name="idUsu" value="<?php echo e(Session::get('usuario')->idUsu); ?>">
-
-                        <div  class="d-flex flex-column justify-content-start align-items-center mt-2">
-                            <button type="submit" class="btn bg-danger">ENVIAR</button>
-                        </div>
-
-                    </form>
-                </div>
-                </div>
-
-                <div class="d-flex flex-column justify-content-start align-items-center mb-5" style="width: 90%;">
-                    <?php $__currentLoopData = $reseñas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reseña): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="my-1 d-flex flex-row justify-content-start align-items-center" style="min-width: 100%; background-color:#d7bbad;">
-                            <div class="bg-primary ms-2 text-center me-3" style="width: 8%;">
-                                <b class="fs-3 text-center text-white"><?php echo e($reseña->puntuacion); ?></b>
-                            </div>
-                            <div class="d-flex flex-column justify-content-start align-items-start" style="height: 4rem;">
-                                <b><?php echo e($reseña->nombre); ?></b>
-                                <?php echo e($reseña->comentario); ?>
-
-                            </div>
-
-                        </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </div>
-
+            <div class="d-flex flex-column justify-content-between align-items-center" style="width: 90%;">
+                <img src="<?php echo e(asset('img/plato1.jpg')); ?>" style="width: 70%" class="my-5">
             </div>
 
+            <div class="d-flex flex-column justify-content-between align-items-center" style="width: 90%;">
+                <img src="<?php echo e(asset('img/plato2.jpg')); ?>" style="width: 70%" class="my-5">
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-column justify-content-center align-items-center" style="width: 34%;">
+
+            <div class="d-flex flex-column justify-content-center align-items-center" style="width: 80%;">
+                <img id="fotoMenu" src="<?php echo e(asset('img/menur.jpg')); ?>" style="width: 100%; display:none">
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-column justify-content-between align-items-center" style="width: 33%;">
+
+                    <div class="d-flex flex-column justify-content-between align-items-center" style="width: 90%;">
+                        <img src="<?php echo e(asset('img/plato3.jpg')); ?>" style="width: 70%" class="my-5">
+                    </div>
+
+                    <div class="d-flex flex-column justify-content-between align-items-center" style="width: 90%;">
+                        <img src="<?php echo e(asset('img/plato4.jpg')); ?>" style="width: 70%" class="my-5">
+                    </div>
+                    
+        </div>
 
     </div>
         
@@ -150,7 +127,27 @@
 
             cambiarTextoBtn.addEventListener('click', cambiarTextoMenu);
         });
+
+        window.onload = function() {
+    var image = document.getElementById("fotoMenu");
+    image.style.display = "block";
+
+    var currentWidth = 1;
+    var targetWidth = 100;
+    var step = 100; // Cálculo del incremento en función de 3 segundos
+
+    var interval = setInterval(function() {
+        if (currentWidth >= targetWidth) {
+            clearInterval(interval);
+        } else {
+            currentWidth += step;
+            image.style.width = "130%";
+        }
+    }, 200); // Intervalo de tiempo de 20 milisegundos
+
+};
+
     </script>
 </body>
 </html>
-<?php echo $__env->make('footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Restaurante\resources\views/reseñas.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Restaurante\resources\views/menu.blade.php ENDPATH**/ ?>

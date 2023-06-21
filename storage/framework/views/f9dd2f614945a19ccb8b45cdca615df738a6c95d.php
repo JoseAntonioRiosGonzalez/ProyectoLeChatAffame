@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Registro</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -13,21 +13,27 @@
 
         <!-- Styles -->
         <style>
+            body {
+            font-family: 'Nunito', sans-serif;
+            height: 100vh;
+        }
         </style>
 </head>
-<body>
-<div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header"><?php echo e(__('Register')); ?></div>
+<body style="background: linear-gradient(#1b1b17, #6c5f51);">
+<div style="width: 100%; height: 96vh" class="d-flex flex-row justify-content-center alilgn-items-center">
+        <div class="card bg-black" style="width: 50%; height: 95vh; border: 2px solid #000000;">
+        <div class="card-header text-center fs-1 fw-bold" style="background-color: #d7bbad;">
+                <img src="<?php echo e(asset('img/logo.png')); ?>" alt="Imagen" style="width: 80px; height: 80px; margin-right: 30px;">
+                LE CHAT AFFAMÉ
+            </div>
 
-                    <div class="card-body">
+            <div class="card-body text-white d-flex flex-column justify-content-between alilgn-items-center" style="width: 100%;">
+                    <div class="" style="height: 60%; width: 100%">
                         <form method="POST" action="<?php echo e(route('registrar')); ?>">
                             <?php echo csrf_field(); ?>
 
-                            <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Name')); ?></label>
+                            <div class="d-flex flex-row justify-content-around alilgn-items-center">
+                                <label for="name" style="width:9rem" class="mt-5 mb-1">Nombre</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control <?php $__errorArgs = ['name'];
@@ -37,7 +43,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="nombre" value="<?php echo e(old('name')); ?>" required autocomplete="name" autofocus>
+unset($__errorArgs, $__bag); ?> mt-5 mb-1" name="nombre" value="<?php echo e(old('name')); ?>" required autocomplete="name" autofocus>
 
                                     <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -54,8 +60,8 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right"><?php echo e(__('E-Mail Address')); ?></label>
+                            <div class="d-flex flex-row justify-content-around alilgn-items-center">
+                                <label for="email" style="width:9rem" class="mt-2 mb-1"><?php echo e(__('E-Mail Address')); ?></label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control <?php $__errorArgs = ['email'];
@@ -65,7 +71,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="email" value="<?php echo e(old('email')); ?>" required autocomplete="email">
+unset($__errorArgs, $__bag); ?> mt-2 mb-1" name="email" value="<?php echo e(old('email')); ?>" required autocomplete="email">
 
                                     <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -82,8 +88,8 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="telefono" class="col-md-4 col-form-label text-md-right">Nº Teléfono</label>
+                            <div class="d-flex flex-row justify-content-around alilgn-items-center">
+                                <label for="telefono" style="width:9rem" class="mt-2 mb-1">Nº Teléfono</label>
 
                                 <div class="col-md-6">
                                     <input id="telefono" type="text" class="form-control <?php $__errorArgs = ['text'];
@@ -93,12 +99,12 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="telefono" required>
+unset($__errorArgs, $__bag); ?> mt-2 mb-1" name="telefono" required>
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Password')); ?></label>
+                            <div class="d-flex flex-row justify-content-around alilgn-items-center">
+                                <label for="password" style="width:9rem" class="mt-2 mb-1"><?php echo e(__('Password')); ?></label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control <?php $__errorArgs = ['password'];
@@ -108,7 +114,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="password" required autocomplete="new-password">
+unset($__errorArgs, $__bag); ?> mt-2 mb-1" name="password" required autocomplete="new-password">
 
                                     <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -125,22 +131,30 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        <?php echo e(__('Register')); ?>
-
+                            <div class="d-flex flex-row justify-content-center alilgn-items-center mt-5">
+                                <div class="">
+                                    <button type="submit" class="btn mx-5" style="background-color: #d7bbad;">
+                                        Registro
                                     </button>
                                 </div>
-                                <div>
-                                    <a href="/">Iniciar Sesión</a>
+                                <div class="">
+                                    <a href="/" class="mx-5 btn text-white bg-secondary" style="text-decoration: none;">Iniciar Sesión</a>
                                 </div>
                             </div>
                         </form>
+                        </div>
+                        <div class="d-flex flex-row justify-content-around alilgn-items-center">
+                            <img src="<?php echo e(asset('img/huellaregistro.jpg')); ?>" style="width:70%; height: 40vh; margin-bottom: 20px;">
+                        </div>
                     </div>
-                </div>
-            </div>
         </div>
+
+       
+    </div>
+
+    <div>
+    
     </div>
 </body>
-</html><?php /**PATH C:\xampp\htdocs\Restaurante\resources\views/registro.blade.php ENDPATH**/ ?>
+</html>
+<?php echo $__env->make('footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Restaurante\resources\views/registro.blade.php ENDPATH**/ ?>

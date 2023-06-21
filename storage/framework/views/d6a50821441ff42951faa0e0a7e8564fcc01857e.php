@@ -32,23 +32,20 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul id="menu-navegacion" class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-inicio'); ?> fw-bold" href="<?php echo e(route('inicio')); ?>">INICIO</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-menu'); ?>" href="<?php echo e(url('/menu')); ?>">MENÚ</a>
+                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-menu'); ?>" href="<?php echo e(route('menu')); ?>">MENÚ</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-calidad'); ?>" href="<?php echo e(url('/calidad')); ?>">CALIDAD</a>
+                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-calidad'); ?>" href="<?php echo e(route('calidad')); ?>">CALIDAD</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-plantilla'); ?>" href="<?php echo e(url('/plantilla')); ?>">PLANTILLA</a>
+                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-plantilla'); ?>" href="<?php echo e(route('plantilla')); ?>">PLANTILLA</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo $__env->yieldContent('menu-activo-resenas'); ?>" href="<?php echo e(route('reseñas')); ?>">RESEÑAS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-reservas'); ?>" href="<?php echo e(url('/reservas')); ?>">RESERVAS</a>
+                        <a class="nav-link <?php echo $__env->yieldContent('menu-activo-reservas'); ?>" href="<?php echo e(route('reservas')); ?>">RESERVAS</a>
                     </li>
                 </ul>
                 <button id="cambiarTextoBtn" class="btn btn-primary ml-auto">ESP<->ENG</button>

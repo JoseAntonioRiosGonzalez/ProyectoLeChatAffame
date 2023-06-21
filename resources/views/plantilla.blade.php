@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Reseñas</title>
+        <title>Plantilla</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -23,6 +23,21 @@
     background-color: #898e75 !important;
     border-color: #898e75 !important;
 }
+@keyframes dissolveEffect {
+    0% {
+        opacity: 0;
+        width: 0;
+    }
+    50% {
+        opacity: 1;
+        width: 130%;
+    }
+    100% {
+        opacity: 1;
+        width: 100%;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -46,10 +61,10 @@
                         <a class="nav-link @yield('menu-activo-calidad')" href="{{ route('calidad') }}">CALIDAD</a>
                     </li>
                     <li class="nav-item; mx-4">
-                        <a class="nav-link @yield('menu-activo-plantilla')" href="{{ route('plantilla') }}">PLANTILLA</a>
+                        <a class="nav-link @yield('menu-activo-plantilla') fw-bold" href="{{ route('plantilla') }}">PLANTILLA</a>
                     </li>
                     <li class="nav-item; mx-4">
-                        <a class="nav-link @yield('menu-activo-resenas') fw-bold" href="{{ route('reseñas') }}">RESEÑAS</a>
+                        <a class="nav-link @yield('menu-activo-resenas')" href="{{ route('reseñas') }}">RESEÑAS</a>
                     </li>
                     <li class="nav-item; mx-4">
                         <a class="nav-link @yield('menu-activo-reservas')" href="{{ route('reservas') }}">RESERVAS</a>
@@ -68,61 +83,31 @@
     </nav>
 
     <!-- Contenido principal -->
-    <div class="bg-black d-flex flex-row justify-content-between align-items-center" style="width: 100%; height: 50%;">
+    <div class="bg-black d-flex flex-column justify-content-between align-items-center" style="width: 100%; height:91vh">
         
-        <div class="d-flex flex-row justify-content-center align-items-center">
-            <img src="{{ asset('img/fotoreseñas.png') }}" alt="" style="width: 93%">
-        </div>
+        <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100%;height:40%">
 
-        <div class="d-flex flex-column justify-content-start align-items-center" style="width: 50%;">
-
-            <div class="d-flex flex-column justify-content-start align-items-center mt-5 bg-secondary pb-4 mb-5" style="width: 90%;">
-
-                <div class="mb-4">
-                    <p class="text-white fs-2">Valora tu experiencia</p>
-                </div>
-
-                <div>
-                    <form action="{{ route('reseñaGuardar') }}" method="POST">
-                    @csrf
-
-                        <div class="d-flex flex-column justify-content-start align-items-center mb-2">
-                            <label for="" class="fs-4">Puntuación</label>
-                            <input type="number" class="form-control" name="puntuacion">
-                        </div>
-
-                        <div class="d-flex flex-column justify-content-start align-items-center mt-2">
-                            <label for="" class="fs-4">Comentario</label>
-                            <input type="text" class="form-control" name="comentario">
-                        </div>
-
-                        <input type="hidden" name="idUsu" value="{{Session::get('usuario')->idUsu}}">
-
-                        <div  class="d-flex flex-column justify-content-start align-items-center mt-2">
-                            <button type="submit" class="btn bg-danger">ENVIAR</button>
-                        </div>
-
-                    </form>
-                </div>
-                </div>
-
-                <div class="d-flex flex-column justify-content-start align-items-center mb-5" style="width: 90%;">
-                    @foreach($reseñas as $reseña)
-                        <div class="my-1 d-flex flex-row justify-content-start align-items-center" style="min-width: 100%; background-color:#d7bbad;">
-                            <div class="bg-primary ms-2 text-center me-3" style="width: 8%;">
-                                <b class="fs-3 text-center text-white">{{$reseña->puntuacion}}</b>
-                            </div>
-                            <div class="d-flex flex-column justify-content-start align-items-start" style="height: 4rem;">
-                                <b>{{$reseña->nombre}}</b>
-                                {{$reseña->comentario}}
-                            </div>
-
-                        </div>
-                    @endforeach
-                </div>
-
+            <div class="d-flex flex-column justify-content-center align-items-center" style="width: 70%;">
+                <p class="fs-2 text-white" style="text-shadow: 1px 1px 3px gray">Nuestro equipo de camareros y cocineros de <i>Le Chat Affamé</i> le espera para ofrecerle el mejor servicio de hostelería. Somos líderes en la Costa del Sol y prueba de ellos son las 3 estrellas Michelín con las que hemos sido galardonados en nuestra extensa trayectoria.</p>
             </div>
 
+        </div>
+
+        <div class="d-flex flex-row justify-content-between align-items-center" style="width: 100%;height:60%">
+
+                    <div class="d-flex flex-column justify-content-between align-items-center" style="width: 90%;">
+                        <img src="{{ asset('img/fotoReservas.png') }}" style="width: 55%" class="my-5">
+                    </div>
+
+                    <div class="d-flex flex-column justify-content-between align-items-center" style="width: 90%;">
+                        <img src="{{ asset('img/plantilla.jpg') }}" style="width: 110%" class="my-5">
+                    </div>
+
+                    <div class="d-flex flex-column justify-content-between align-items-center" style="width: 90%;">
+                        <img src="{{ asset('img/logo.png') }}" style="width: 55%" class="my-5">
+                    </div>
+                    
+        </div>
 
     </div>
         
@@ -149,6 +134,9 @@
 
             cambiarTextoBtn.addEventListener('click', cambiarTextoMenu);
         });
+
+
+
     </script>
 </body>
 </html>
